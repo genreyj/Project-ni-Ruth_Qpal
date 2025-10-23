@@ -438,7 +438,7 @@ try {
       <!-- Hero Section -->
       <div class="hero-section fade-in active" id="heroSection">
         <div class="container">
-          <h1 class="content-title bounce-in">Document Management System</h1>
+          <h1 class="content-title bounce-in">DocMan System</h1>
           <p class="system-description">
             A comprehensive and secure document management solution. Streamline
             your document workflows with advanced security, role-based access
