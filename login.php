@@ -16,13 +16,13 @@ if (isset($_SESSION['user_id']) && isset($_SESSION['role_id'])) {
     
     switch ($role_id) {
         case ROLE_SUPER_ADMIN:
-            header('Location: views/super-admin/admin_dashboard.html');
+            header('Location: views/super-admin/admin_dashboard.php');
             exit();
         case ROLE_DEPT_ADMIN:
-            header('Location: views/dept-admin/dashboard.html');
+            header('Location: views/dept-admin/dashboard.php');
             exit();
         case ROLE_USER:
-            header('Location: views/user/user_dashboard.html');
+            header('Location: views/user/user_dashboard.php');
             exit();
     }
 }
@@ -59,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmt->execute([$username, $username]);
             $user = $stmt->fetch();
             
-            if ($user && password_verify($password, $user['password_hash'])) {
-                // Login successful
+            if ($user && $password === $user['password']) {
+                // Login successful - plain text password comparison
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['email'] = $user['email'];
