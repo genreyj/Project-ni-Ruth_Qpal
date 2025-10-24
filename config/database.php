@@ -1,11 +1,12 @@
 <?php
 
 define('DB_HOST', 'localhost');
-define('DB_PORT', '3306'); 
-define('DB_NAME', 'system_docman'); 
+define('DB_PORT', '3306');
+define('DB_NAME', 'system_docman');
 define('DB_USER', 'root');
-define('DB_PASS', '55555');  
+define('DB_PASS', ''); // <-- add this line
 define('DB_CHARSET', 'utf8mb4');
+
 
 // Create PDO connection
 function getDBConnection() {
