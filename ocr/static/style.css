@@ -1,0 +1,50 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  letter-spacing: 2px;
+  margin: 40px;
+  text-align: center;
+}
+.container {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  width: 60%;
+  margin: auto;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+pre {
+  text-align: left;
+  white-space: pre-wrap;
+  padding: 10px;
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+button {
+  background: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+button:hover {
+  background: #0056b3;
+}
+
+progress {
+  height: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#progressText {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 5px;
+}
+
+#previewContainer img {
+  margin: 5px;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
