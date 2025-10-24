@@ -1,7 +1,6 @@
 <?php
 /**
  * Landing Page - Document Management System
- * Pamantasan ng Lungsod ng Pasig
  */
 
 // Start session
