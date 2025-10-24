@@ -86,7 +86,7 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Super Admin Dashboard</title>
+    <title>Department Admin</title>
     
     <!-- Bootstrap CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
@@ -111,139 +111,298 @@ try {
             background-color: #f8f9fa;
         }
         
-        /* Sidebar */
         .sidebar {
             min-height: 100vh;
-            background: linear-gradient(180deg, var(--sidebar-bg) 0%, #34495e 100%);
+            background: var(--sidebar-bg);
             color: white;
             position: fixed;
             top: 0;
             left: 0;
-            width: 260px;
+            width: 250px;
             z-index: 100;
             padding: 0;
             box-shadow: 2px 0 10px rgba(0,0,0,0.1);
         }
         
         .sidebar-header {
-            padding: 20px;
+            padding: 30px 20px;
+            text-align: center;
             background: rgba(0,0,0,0.2);
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
         
+        .profile-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
         .sidebar-brand {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: bold;
             color: white;
             text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            display: block;
+            margin-bottom: 5px;
         }
         
-        .department-badge {
-            background: rgba(13, 110, 253, 0.3);
-            padding: 8px 12px;
-            border-radius: 8px;
-            margin-top: 10px;
+        .sidebar-subtitle {
             font-size: 0.85rem;
-            text-align: center;
+            color: rgba(255,255,255,0.7);
         }
         
         .sidebar-menu {
             list-style: none;
-            padding: 20px 0;
+            padding: 0;
             margin: 0;
         }
         
+        .menu-section-title {
+            padding: 20px 20px 10px;
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+        
         .sidebar-menu li {
-            margin-bottom: 5px;
+            margin: 0;
         }
         
         .sidebar-menu a {
             display: flex;
             align-items: center;
-            padding: 12px 20px;
+            padding: 12px 25px;
             color: rgba(255,255,255,0.8);
             text-decoration: none;
             transition: all 0.3s;
             gap: 12px;
+            font-size: 0.9rem;
         }
         
         .sidebar-menu a:hover {
             background: var(--sidebar-hover);
             color: white;
-            padding-left: 25px;
         }
         
         .sidebar-menu a.active {
-            background: var(--primary-color);
+            background: rgba(255,255,255,0.1);
             color: white;
-            border-left: 4px solid white;
+            border-left: 3px solid var(--primary-color);
         }
         
         .sidebar-menu i {
             width: 20px;
             text-align: center;
+            font-size: 1.1rem;
         }
         
         /* Main Content */
         .main-content {
-            margin-left: 260px;
+            margin-left: 250px;
             padding: 0;
+            min-height: 100vh;
         }
         
         /* Top Navbar */
         .top-navbar {
             background: white;
             padding: 15px 30px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 50;
         }
         
         .page-title {
-            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
             font-weight: 600;
             color: #333;
             margin: 0;
         }
         
-        .user-info {
+        .page-title i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+        }
+        
+        .navbar-right {
             display: flex;
             align-items: center;
             gap: 15px;
         }
         
-        .user-avatar {
+        .notification-icon, .settings-icon {
+            position: relative;
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: var(--primary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+            color: #666;
+        }
+        
+        .notification-icon:hover, .settings-icon:hover {
+            background: #f0f0f0;
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #dc3545;
+            color: white;
+            font-size: 0.65rem;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .user-dropdown {
+            position: relative;
+        }
+        
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--teal-color);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
         }
         
-        .user-details {
-            text-align: right;
+        .user-avatar:hover {
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         
-        .user-name {
-            font-weight: 600;
-            color: #333;
+        .dropdown-menu-custom {
+            position: absolute;
+            top: 60px;
+            right: 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            min-width: 250px;
+            display: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+        
+        .dropdown-menu-custom.show {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .dropdown-header {
+            padding: 20px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .dropdown-header h6 {
+            margin: 0 0 5px;
+            font-size: 0.75rem;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .dropdown-header h5 {
             margin: 0;
+            font-size: 1rem;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .dropdown-body {
+            padding: 10px;
+        }
+        
+        .dropdown-item-custom {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 15px;
+            color: #333;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
             font-size: 0.9rem;
         }
         
-        .user-role {
-            font-size: 0.75rem;
-            color: #6c757d;
-            margin: 0;
+        .dropdown-item-custom:hover {
+            background: #f0f0f0;
         }
+        
+        .dropdown-item-custom i {
+            width: 20px;
+            text-align: center;
+        }
+        
+        .dropdown-footer {
+            padding: 10px;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .btn-logout {
+            width: 100%;
+            padding: 10px;
+            background: var(--teal-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .btn-logout:hover {
+            background: #138496;
+            color: white;
+        }
+        
         
         /* Dashboard Cards */
         .content-area {
@@ -362,37 +521,64 @@ try {
     <!-- Sidebar -->
     <div class="sidebar">
         <div class="sidebar-header">
-            <a href="dashboard.php" class="sidebar-brand">
-                <i class="bi bi-file-earmark-text"></i>
-                <span>DMS - Dept Admin</span>
-            </a>
-            <div class="department-badge">
-                <i class="bi bi-building"></i> <?php echo htmlspecialchars($department_name); ?>
+            <div class="profile-image">
+                <img src="../../assets/images/jr.png" alt="Admin" onerror="this.parentElement.innerHTML='<i class=\'bi bi-person-circle\' style=\'font-size: 3rem; color: var(--sidebar-bg);\'></i>';">
             </div>
+            <div class="sidebar-brand">Jericho Riga</div>
+            <div class="sidebar-subtitle">Department Admin</div>
         </div>
         
         <ul class="sidebar-menu">
-            <li><a href="dashboard.php" class="active"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
-            <li><a href="dept_users.php"><i class="bi bi-people"></i> Department Users</a></li>
-            <li><a href="dept_documents.php"><i class="bi bi-file-earmark-text"></i> Documents</a></li>
-            <li><a href="approval_queue.php"><i class="bi bi-check-circle"></i> Approval Queue</a></li>
-            <li><a href="dept_reports.php"><i class="bi bi-graph-up"></i> Reports</a></li>
-            <li><a href="../../logout.php"><i class="bi bi-box-arrow-right"></i> Logout</a></li>
+            <li><a href="#dashboardSection" class="nav-link active"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+            
+            <li class="menu-section-title">ADMIN TOOLS</li>
+            <li><a href="#documentManagement" class="nav-link"><i class="bi bi-file-earmark-text"></i> Document Management</a></li>
+            <li><a href="#departmentManagement" class="nav-link"><i class="bi bi-building"></i> Department Management</a></li>
+            <li><a href="#auditTrails" class="nav-link"><i class="bi bi-clock-history"></i> Audit Trails</a></li>
+            
+            <li class="menu-section-title">SETTING</li>
+            <li><a href="#setting" class="nav-link"><i class="bi bi-info-circle"></i> Setting</a></li>
         </ul>
     </div>
     
     <!-- Main Content -->
-    <div class="main-content">
+     <div class="main-content">
         <!-- Top Navbar -->
         <div class="top-navbar">
-            <h1 class="page-title">Department Dashboard</h1>
-            <div class="user-info">
-                <div class="user-details">
-                    <p class="user-name"><?php echo htmlspecialchars($full_name); ?></p>
-                    <p class="user-role"><?php echo htmlspecialchars($role_name); ?></p>
+            <h1 class="page-title">
+                <i class="bi bi-speedometer2"></i>
+                <span class="dashboard-title">DASHBOARD</span>
+            </h1>
+            <div class="navbar-right">
+                <div class="notification-icon">
+                    <i class="bi bi-bell" style="font-size: 1.2rem;"></i>
+                    <span class="notification-badge">3</span>
                 </div>
-                <div class="user-avatar">
-                    <?php echo strtoupper(substr($full_name, 0, 1)); ?>
+                <div class="settings-icon">
+                    <i class="bi bi-question-circle" style="font-size: 1.2rem;"></i>
+                </div>
+                <div class="user-dropdown">
+                    <div class="user-avatar" onclick="toggleDropdown()">
+                        DA
+                    </div>
+                    <div class="dropdown-menu-custom" id="userDropdown">
+                        <div class="dropdown-header">
+                            <h6>Department Admin</h6>
+                            <h5>Hi, Admin!</h5>
+                        </div>
+                        <div class="dropdown-body">
+                            <a href="profile.php" class="dropdown-item-custom">
+                                <i class="bi bi-person"></i>
+                                Manage Account
+                            </a>
+                        </div>
+                        <div class="dropdown-footer">
+                            <a href="../../logout.php" class="btn-logout">
+                                <i class="bi bi-box-arrow-right"></i>
+                                Log Out
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -498,7 +684,63 @@ try {
         </div>
     </div>
     
+    
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+     <script>
+        // Toggle user dropdown
+        function toggleDropdown() {
+            const dropdown = document.getElementById('userDropdown');
+            dropdown.classList.toggle('show');
+        }
+        
+        // Close dropdown when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-avatar')) {
+                const dropdown = document.getElementById('userDropdown');
+                if (dropdown && dropdown.classList.contains('show')) {
+                    dropdown.classList.remove('show');
+                }
+            }
+        }
+
+        $(document).ready(function() {
+            var initialDashboardContent = $("#contentArea").html();
+
+            // Sidebar nav active state and section switching
+            $(document).on("click", ".sidebar .nav-link", function (e) {
+                var href = $(this).attr("href");
+                if (href && href.startsWith("#")) {
+                    e.preventDefault();
+                    $(".sidebar .nav-link").removeClass("active");
+                    $(this).addClass("active");
+
+                    // Update top header title
+                    const titles = {
+                    "#dashboardSection": "DASHBOARD",
+                    "#departmentManagement": "DEPARTMENT MANAGEMENT",
+                    "#documentManagement": "DOCUMENT MANAGEMENT",
+                    "#auditTrails": "AUDIT TRAILS",
+                    "#setting": "SETTING",
+                    };
+                    $(".dashboard-title").text(titles[href] || "DASHBOARD");
+
+                    // Load section content
+                    if (href === "#dashboardSection") {
+                        $("#contentArea").html(initialDashboardContent);
+                    } else {
+                    // For other sections, show placeholder
+                    $("#contentArea").html(
+                        '<div class="card"><div class="card-body"><h5 class="card-title">' +
+                        titles[href] +
+                        '</h5><div class="text-muted">Content for ' +
+                        titles[href] +
+                        " will appear here.</div></div></div>"
+                    );
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>

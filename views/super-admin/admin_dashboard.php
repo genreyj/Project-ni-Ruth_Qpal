@@ -1,10 +1,5 @@
 <?php
-/**
- * Super Admin Dashboard - Document Management System
- * Pamantasan ng Lungsod ng Pasig
- */
 
-// Start session
 session_start();
 
 // Include database configuration
@@ -585,17 +580,17 @@ try {
         </div>
         
         <ul class="sidebar-menu">
-            <li><a href="admin_dashboard.php" class="active"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
+            <li><a href="#dashboardSection" class="nav-link active"><i class="bi bi-speedometer2"></i> Dashboard</a></li>
             
             <li class="menu-section-title">ADMIN TOOLS</li>
-            <li><a href="document_management.php"><i class="bi bi-file-earmark-text"></i> Document Management</a></li>
-            <li><a href="department_management.php"><i class="bi bi-building"></i> Department Management</a></li>
-            <li><a href="user_management.php"><i class="bi bi-person-gear"></i> User Management</a></li>
-            <li><a href="database_management.php"><i class="bi bi-database"></i> Database Management</a></li>
-            <li><a href="audit_trails.php"><i class="bi bi-clock-history"></i> Audit Trails</a></li>
+            <li><a href="#documentManagement" class="nav-link"><i class="bi bi-file-earmark-text"></i> Document Management</a></li>
+            <li><a href="#departmentManagement" class="nav-link"><i class="bi bi-building"></i> Department Management</a></li>
+            <li><a href="#userManagement" class="nav-link"><i class="bi bi-person-gear"></i> User Management</a></li>
+            <li><a href="#databaseManagement" class="nav-link"><i class="bi bi-database"></i> Database Management</a></li>
+            <li><a href="#auditTrails" class="nav-link"><i class="bi bi-clock-history"></i> Audit Trails</a></li>
             
             <li class="menu-section-title">SETTING</li>
-            <li><a href="system_information.php"><i class="bi bi-info-circle"></i> System Information</a></li>
+            <li><a href="#systemInformation" class="nav-link"><i class="bi bi-info-circle"></i> System Information</a></li>
         </ul>
     </div>
     
@@ -605,7 +600,7 @@ try {
         <div class="top-navbar">
             <h1 class="page-title">
                 <i class="bi bi-speedometer2"></i>
-                Dashboard
+                <span class="dashboard-title">DASHBOARD</span>
             </h1>
             <div class="navbar-right">
                 <div class="notification-icon">
@@ -642,7 +637,7 @@ try {
         </div>
         
         <!-- Content Area -->
-        <div class="content-area">
+        <div class="content-area" id="contentArea">
             <!-- Statistics Cards -->
             <div class="row g-4 mb-4">
                 <div class="col-md-3">
@@ -751,6 +746,9 @@ try {
     <!-- Bootstrap JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <!-- Custom JS -->
     <script>
         // Toggle user dropdown
@@ -768,6 +766,46 @@ try {
                 }
             }
         }
+
+        $(document).ready(function() {
+            var initialDashboardContent = $("#contentArea").html();
+
+            // Sidebar nav active state and section switching
+            $(document).on("click", ".sidebar .nav-link", function (e) {
+                var href = $(this).attr("href");
+                if (href && href.startsWith("#")) {
+                    e.preventDefault();
+                    $(".sidebar .nav-link").removeClass("active");
+                    $(this).addClass("active");
+
+                    // Update top header title
+                    const titles = {
+                    "#dashboardSection": "DASHBOARD",
+                    "#departmentManagement": "DEPARTMENT MANAGEMENT",
+                    "#documentManagement": "DOCUMENT MANAGEMENT",
+                    "#userManagement": "USER MANAGEMENT",
+                    "#databaseManagement": "DATABASE MANAGEMENT",
+                    "#auditTrails": "AUDIT TRAILS",
+                    "#systemInformation": "SYSTEM INFORMATION",
+                    };
+                    $(".dashboard-title").text(titles[href] || "DASHBOARD");
+
+                    // Load section content
+                    if (href === "#dashboardSection") {
+                        $("#contentArea").html(initialDashboardContent);
+                    } else {
+                    // For other sections, show placeholder
+                    $("#contentArea").html(
+                        '<div class="card"><div class="card-body"><h5 class="card-title">' +
+                        titles[href] +
+                        '</h5><div class="text-muted">Content for ' +
+                        titles[href] +
+                        " will appear here.</div></div></div>"
+                    );
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html>
