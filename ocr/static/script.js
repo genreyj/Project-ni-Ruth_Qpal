@@ -61,6 +61,10 @@ document.getElementById("uploadBtn").addEventListener("click", async () => {
       if (data.error) {
         combinedOutput += `❌ ${file.name}: ${data.error}\n\n`;
       } else {
+        document.getElementById("fileType").textContent = data.file_type;
+        document.getElementById("department").textContent = data.department;
+        document.getElementById("category").textContent = data.category;
+
         combinedOutput += `✅ ${file.name}\n`;
         combinedOutput += `Type: ${data.file_type}\n`;
         combinedOutput += `Department: ${data.department}\n`;
