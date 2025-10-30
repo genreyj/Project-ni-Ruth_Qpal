@@ -712,10 +712,10 @@ document.getElementById("analyzeBtn").addEventListener("click", function () {
                 <span class="badge bg-danger">Error</span>
               </li>`;
             }
-            const ft = (r.file_type || "unknown").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            const sizeLabel = formatBytes(r.file_size);
             return `<li class="list-group-item d-flex justify-content-between align-items-center">
               ${name}
-              <span class="badge bg-success">${ft}</span>
+              <span class="badge bg-secondary">${sizeLabel}</span>
             </li>`;
           }).join("")}
         </ul>
@@ -888,11 +888,11 @@ function handleFileSelection() {
         '"': "&quot;",
         "'": "&#39;"
       }[ch]));
-      const sizeKb = Math.max(1, Math.round(file.size / 1024));
+      const sizeLabel = formatBytes(file.size);
       return `
         <li class="list-group-item d-flex justify-content-between align-items-center">
           ${safeName}
-          <span class="badge bg-secondary">${sizeKb} KB</span>
+          <span class="badge bg-secondary">${sizeLabel}</span>
         </li>
       `;
     })
@@ -902,4 +902,14 @@ function handleFileSelection() {
     <div class="mb-2 text-muted small">Selected files (${files.length}):</div>
     <ul class="list-group">${items}</ul>
   `;
+}
+
+function formatBytes(bytes) {
+  const n = Number(bytes);
+  if (!Number.isFinite(n) || n < 0) return "n/a";
+  if (n === 0) return "0 B";
+  const units = ["B", "KB", "MB", "GB", "TB"];
+  const idx = Math.min(units.length - 1, Math.floor(Math.log(n) / Math.log(1024)));
+  const value = n / Math.pow(1024, idx);
+  return `${value >= 100 ? Math.round(value) : value.toFixed(1)} ${units[idx]}`;
 }
