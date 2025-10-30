@@ -1,0 +1,14 @@
+# Use index.php as the default document
+DirectoryIndex index.php
+
+# Enable URL rewriting
+RewriteEngine On
+RewriteBase /ocr/
+
+# If the request is not an existing file or directory, route to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
+
+# Custom 404 handler
+ErrorDocument 404 /ocr/404.php

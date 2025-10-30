@@ -119,7 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['documentFile'])) {
         $res = process_single_file($targetPath);
         $res['original_name'] = $origName;
         $res['public_url'] = $publicUrl;
-        $res['file_size'] = $size;
 
         // NOTE: keep files for preview (do not unlink)
         $results[] = $res;
