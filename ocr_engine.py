@@ -1,3 +1,15 @@
+import os
+import cv2
+import pytesseract
+from PIL import Image
+import easyocr
+from paddleocr import PaddleOCR
+import pdfplumber
+import docx
+import pandas as pd
+from pdf2image import convert_from_path
+import numpy as np
+import mimetypes
 import sys, json, os, mimetypes
 
 os.environ.setdefault("KMP_DUPLICATE_LIB_OK", "TRUE")
